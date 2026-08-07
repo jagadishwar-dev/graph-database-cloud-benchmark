@@ -1,0 +1,6 @@
+Benchmark,Execution Time (ms),Execution Time (sec)
+Insert Benchmark,1319028,1319.0282514
+Lookup Benchmark,597,0.5977378
+Traversal Benchmark,6763,6.7630898
+Aggregation Benchmark,588,0.588899
+Mixed Workload Benchmark,3777,3.7773164
