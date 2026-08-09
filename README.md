@@ -46,13 +46,10 @@ The benchmark dataset contains:
 
 The relationships are represented using:
 
-```text
-
 ---
 
 ## 4. Project Structure
 
-```text
 graph-database-cloud-benchmark
 │
 ├── src/main/java
@@ -107,7 +104,6 @@ Relationships are processed in batches of 500 using Cypher `UNWIND`.
 
 The following operations are performed:
 
-```cypher
 UNWIND $relationships AS rel
 MERGE (a:Person {id: rel.source})
 MERGE (b:Person {id: rel.target})
@@ -137,7 +133,6 @@ P95 is useful for understanding slower requests and tail latency.
 
 Query execution time is measured using Java's:
 
-```java
 System.nanoTime()
 
 ---
@@ -219,7 +214,6 @@ Database connection details are provided through environment variables.
 
 The application expects:
 
-```text
 COGNODB_URI
 COGNODB_USERNAME
 COGNODB_PASSWORD
@@ -232,7 +226,6 @@ COGNODB_PASSWORD
 
 Set the required CognoDB connection environment variables:
 
-```text
 COGNODB_URI
 COGNODB_USERNAME
 COGNODB_PASSWORD
@@ -243,7 +236,6 @@ COGNODB_PASSWORD
 
 The benchmark results are stored in:
 
-```text
 results/benchmark.csv
 
 ---
