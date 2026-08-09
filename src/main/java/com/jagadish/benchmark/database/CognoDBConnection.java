@@ -33,9 +33,9 @@ public class CognoDBConnection {
         if (driver != null) {
 
             driver.close();
+            driver = null;
+
             System.out.println("Connection Closed.");
         }
-
     }
-
 }

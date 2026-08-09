@@ -1,6 +1,8 @@
-Benchmark,Execution Time (ms),Execution Time (sec)
-Insert Benchmark,1319028,1319.0282514
-Lookup Benchmark,597,0.5977378
-Traversal Benchmark,6763,6.7630898
-Aggregation Benchmark,588,0.588899
-Mixed Workload Benchmark,3777,3.7773164
+Benchmark,P50 Latency (ms),P95 Latency (ms),Nodes,Relationships,Load Time (ms),Nodes/sec,Relationships/sec
+Insert Benchmark,N/A,N/A,49683,100000,2782726.0,17.854074240592873,35.9359826109391
+Lookup Benchmark,309.0,635.1822,,,,,
+Traversal 1-Hop,319.2773,639.341,,,,,
+Traversal 2-Hop,319.5801,740.084,,,,,
+Traversal 3-Hop,301.0503,425.3072,,,,,
+Aggregation Benchmark,295.3457,357.7538,,,,,
+Mixed Workload Benchmark,303.7339,1486.1186,,,,,

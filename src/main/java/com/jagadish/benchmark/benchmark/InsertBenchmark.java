@@ -1,6 +1,7 @@
 package com.jagadish.benchmark.benchmark;
 
 import com.jagadish.benchmark.loader.DataLoader;
+import com.jagadish.benchmark.loader.DataLoader.LoadResult;
 import com.jagadish.benchmark.util.CSVWriter;
 import com.jagadish.benchmark.util.Timer;
 
@@ -13,38 +14,68 @@ public class InsertBenchmark {
         timer.start();
 
         DataLoader loader = new DataLoader();
-        loader.loadCSV("src/main/resources/dataset/graph.csv");
+
+        LoadResult result = loader.loadCSV(
+            "src/main/resources/dataset/graph.csv"
+        );
 
         timer.stop();
 
-        int nodes = 2000;
-        int relationships = 4000;
+        int nodes = result.getNodes();
+        int relationships = result.getRelationships();
+
+        double seconds =
+            timer.getElapsedTimeInSeconds();
+
+        double milliseconds =
+            timer.getElapsedTimeInMilliseconds();
+
+        double relationshipsPerSecond =
+            relationships / seconds;
+
+        double nodesPerSecond =
+            nodes / seconds;
 
         System.out.println("--------------------------------");
         System.out.println("INSERT BENCHMARK");
         System.out.println("--------------------------------");
 
-        System.out.println("Nodes Inserted        : " + nodes);
-        System.out.println("Relationships Inserted: " + relationships);
-
-        System.out.println("Execution Time        : "
-                + timer.getElapsedTimeInMilliseconds() + " ms");
-
-        double seconds = timer.getElapsedTimeInSeconds();
-
-        System.out.println("Execution Time        : "
-                + seconds + " seconds");
-        
-        CSVWriter.writeResult(
-        	    "Insert Benchmark",
-        	    timer.getElapsedTimeInMilliseconds(),
-        	    seconds
+        System.out.println(
+            "Nodes                 : " + nodes
         );
 
-        System.out.println("Nodes/sec             : "
-                + (nodes / seconds));
+        System.out.println(
+            "Relationships Inserted: " + relationships
+        );
 
-        System.out.println("Relationships/sec     : "
-                + (relationships / seconds));
+        System.out.println(
+            "Execution Time        : "
+            + milliseconds
+            + " ms"
+        );
+
+        System.out.println(
+            "Execution Time        : "
+            + seconds
+            + " seconds"
+        );
+
+        System.out.println(
+            "Nodes/sec             : "
+            + nodesPerSecond
+        );
+
+        System.out.println(
+            "Relationships/sec     : "
+            + relationshipsPerSecond
+        );
+
+        CSVWriter.writeIngestResult(
+            nodes,
+            relationships,
+            milliseconds,
+            nodesPerSecond,
+            relationshipsPerSecond
+        );
     }
 }

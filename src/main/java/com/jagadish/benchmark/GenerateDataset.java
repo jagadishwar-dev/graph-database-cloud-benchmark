@@ -1,7 +1,9 @@
 package com.jagadish.benchmark;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GenerateDataset {
 
@@ -9,36 +11,41 @@ public class GenerateDataset {
 
         String filePath = "src/main/resources/dataset/graph.csv";
 
-        int nodes = 2000;
-        int relationships = 4000;
+        Set<String> nodes = new HashSet<>();
+        int relationships = 0;
 
-        try (FileWriter writer = new FileWriter(filePath)) {
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(filePath))) {
 
-            int source = 1;
-            int target = 2;
+            // Skip header
+            reader.readLine();
 
-            for (int i = 0; i < relationships; i++) {
+            String line;
 
-                writer.write(source + "," + target + "\n");
+            while ((line = reader.readLine()) != null) {
 
-                target++;
+                String[] values = line.split(",");
 
-                if (target > nodes) {
-                    source++;
-                    target = source + 1;
+                if (values.length < 2) {
+                    continue;
                 }
 
-                if (source >= nodes) {
-                    source = 1;
-                    target = 2;
-                }
+                String source = values[0].trim();
+                String target = values[1].trim();
+
+                nodes.add(source);
+                nodes.add(target);
+
+                relationships++;
             }
 
-            System.out.println("Dataset generated successfully!");
-            System.out.println("Nodes: " + nodes);
-            System.out.println("Relationships: " + relationships);
+            System.out.println("--------------------------------");
+            System.out.println("POKEC DATASET STATISTICS");
+            System.out.println("--------------------------------");
+            System.out.println("Unique Nodes  : " + nodes.size());
+            System.out.println("Relationships : " + relationships);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
