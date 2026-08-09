@@ -47,7 +47,6 @@ The benchmark dataset contains:
 The relationships are represented using:
 
 ```text
-(:Person)-[:CONNECTED_TO]->(:Person)
 
 ---
 
